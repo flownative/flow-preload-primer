@@ -26,8 +26,11 @@ class Package extends BasePackage
     {
         $dispatcher = $bootstrap->getSignalSlotDispatcher();
         $dispatcher->connect(Bootstrap::class, 'finishedRuntimeRun', function () use ($bootstrap, $dispatcher) {
-            $preloadingFilesPathAndFilename = FLOW_PATH_CONFIGURATION . $bootstrap->getContext() . '/PreloadingFiles.json';
+            if (!file_exists(FLOW_PATH_CONFIGURATION . $bootstrap->getContext() . '/PreloadingFiles.on')) {
+                return;
+            }
 
+            $preloadingFilesPathAndFilename = FLOW_PATH_CONFIGURATION . $bootstrap->getContext() . '/PreloadingFiles.json';
             if (file_exists($preloadingFilesPathAndFilename)) {
                 $files = json_decode(file_get_contents($preloadingFilesPathAndFilename), true);
             } else {
