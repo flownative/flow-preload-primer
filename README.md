@@ -9,12 +9,12 @@ preloading information and preload classes for PHP's opcache.
 
 tldr;
 
-- touch Configuration/Development/Beach/Instance/PreloadingFiles.on
+- `touch Configuration/Development/Beach/Instance/PreloadingFiles.on`
 - request a few URLs via the browser
-- find Configuration/Development/Beach/Instance/PreloadingFiles.json
+- find `Configuration/Development/Beach/Instance/PreloadingFiles.json`
   inside the container, move it to the same directory outside the
   container, so you can add it to Git
-- remove Configuration/Development/Beach/Instance/PreloadingFiles.on
+- remove `Configuration/Development/Beach/Instance/PreloadingFiles.on`
 - deploy the site with PHP's opcache script pointing to
   `/application/Packages/Application/Flownative.PreloadPrimer/Scripts/preload.php`
 

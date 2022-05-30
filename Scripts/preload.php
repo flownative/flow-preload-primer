@@ -1,5 +1,7 @@
 #!/usr/bin/env php
 <?php
+declare(strict_types=1);
+
 $context = getenv('FLOW_CONTEXT');
 $preloadingFilesPathAndFilename = __DIR__ . '/../../../../Configuration/' . $context . '/PreloadingFiles.json';
 $logPathAndFilename = __DIR__ . '/../../../../Data/Logs/Preloading.log';
@@ -9,11 +11,10 @@ if (!file_exists($preloadingFilesPathAndFilename)) {
     return;
 }
 
-$files = json_decode(file_get_contents($preloadingFilesPathAndFilename), true);
+$files = json_decode(file_get_contents($preloadingFilesPathAndFilename), true, 512, JSON_THROW_ON_ERROR);
 $maximum = max($files);
 
 file_put_contents($logPathAndFilename, 'Preloading files ...' . PHP_EOL, FILE_APPEND);
-
 
 foreach ($files as $file => $incidence) {
     if ($incidence === $maximum) {
